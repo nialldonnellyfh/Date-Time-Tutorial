@@ -2,8 +2,8 @@
   "name": "fh-app",
   "version": "0.1.0",
   "dependencies" : {
-    "fh-nodeapp" : "*"
-    ,"request" : "2.0.0"
-    ,"jsdom" : "0.5.4"
-}
+    "fh-nodeapp" : "*",
+    "request" : "2.0.0",
+    "jsdom" : "0.5.4"
+  }
 }
