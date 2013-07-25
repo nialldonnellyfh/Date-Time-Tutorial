@@ -1,51 +1,84 @@
-var util = require('util');
-var request = require('request');
-var jsdom = require("jsdom");
+//var request = require('request');
+//var jsdom = require('jsdom');
+
+
+exports.getCurrentTime = function(params, callback) {
+
+  return callback(null, { response : 'Sunday, 1 January 1900, 00:00:00' });
 
 /*
-  Our getCurrentTime function now simply checks to see if the cache
-  contains a date & time - if so, it returns the value from cache
-  if not, it calls out to the web to retrieve & saves in cache
- */
-exports.getCurrentTime = function(params, cb) {
-  $fh.cache({
-    act: "load",
-    key: 'datetime'
-  }, function(err, res) {
-    if (err || !res) {
-      return getDateTimeFromWeb(params, cb);
+  $fh.cache(
+
+    {
+      act: 'load',
+      key: 'datetime'
+    },
+
+    function(err, res) {
+
+      if (err || !res) {
+        console.log('Returning Time - From WEB');
+        return getCurrentTimeFromWeb(params, callback);
+      }
+
+      else {
+        console.log('Returning Time - From CACHE');
+        return callback(null, { response : res });
+//        return callback(null, { response : res, cached: true });
+      }
+
     }
 
-    return cb(null, res);
+  );
+*/
 
-  });
 };
 
+
+function getCurrentTimeFromWeb(params, callback){
+
 /*
- Our new function that calls out to the web to get the date & time. Only happens if
- cache isn't 'hot'
- */
-function getDateTimeFromWeb(params, cb){
-  request({uri : 'http://www.timeanddate.com/worldclock/city.html?n=78'}, function(err, res, body){
-    // Run some jQuery on a html fragment
-    jsdom.env(
-    body,
-    ["http://code.jquery.com/jquery.js"],
-    function(errors, window) {
-      var ct = window.$('#ct').text();
-      console.log("contents of the current time div:", ct);
+  request(
 
-      $fh.cache({
-        act: "save",
-        key: 'datetime',
-        value: ct,
-        expire: 10 // expires in 10 seconds
-      }, function(err, res) {
-        // Success or failure not so important here - do nothing.
-      });
+    {
+      uri: 'http://www.timeanddate.com/worldclock/city.html?n=78'
+    },
 
-      return cb(errors, { response : ct });
-    }
-    );
+    function(err, res, body) {
+
+      console.log(body);
+
+      jsdom.env(
+
+        body,
+
+        ['http://code.jquery.com/jquery.js'],
+
+        function(errors, window) {
+
+          var currentTime = window.$('#ct').text();
+
+          console.log('Current Time: ', currentTime);
+
+          $fh.cache(
+
+            {
+              act: 'save',
+              key: 'datetime',
+              value: currentTime,
+              expire: 10
+            },
+
+            function(err, res) {
+              // Success or failure not so important here - do nothing.
+            }
+
+          );
+
+          return callback(errors, { response : currentTime });
+        }
+      );
+*/
+
   });
 }

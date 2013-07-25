@@ -1,24 +1,66 @@
-<script src="js/jquery-1.9.1.min.js"></script>
+<!DOCTYPE HTML>
 
-<p> Current Time : </p>
-<div id="current_time_response"> </div>
-<button id="current_time"> Refresh time </button>
+<html>
 
-<script>
-  $(document).ready(function(){
-    $('#current_time').click(readTime);
-    // Do an initial read of the current time
-    readTime();
-  });
 
-  function readTime() {
-    $fh.act({
-      act: 'getCurrentTime'
-    }, function(res) {
-      // Display the time in-app
-      $('#current_time_response').html(res.response);
+<head>
+
+<!--
+  <link href="css/style.css" rel="stylesheet" />
+-->
+
+<!--
+  <script src="js/jquery-1.10.2.js"></script>
+-->
+
+</head>
+
+
+<body>
+
+<!--
+  <div>
+    Current Time:
+    <span id="current-time-response">Unset</span>
+  </div>
+-->
+
+<!--
+  <div>
+    <button id="current-time">Refresh Time</button>
+  </div>
+-->
+
+<!--
+  <script>
+
+/*
+    $(document).ready(function() {
+      //$('#current-time').click(readTime);
+      //readTime();
     });
+*/
+/*
+    function readTime() {
 
-  }
+      $fh.act(
+        {
+          act: 'getCurrentTime'
+        },
 
-</script>
+        function(res) {
+          console.log('response: ', res);
+          $('#current-time-response').html(res.response);
+        }
+
+      );
+    }
+*/
+
+  </script>
+-->
+
+</body>
+
+
+</html>
