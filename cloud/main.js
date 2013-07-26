@@ -6,7 +6,7 @@ exports.getCurrentTime = function(params, callback) {
 
   return callback(null, { response : 'Sunday, 1 January 1900, 00:00:00' });
 
-/*
+
   $fh.cache(
 
     {
@@ -30,14 +30,14 @@ exports.getCurrentTime = function(params, callback) {
     }
 
   );
-*/
+
 
 };
 
 
 function getCurrentTimeFromWeb(params, callback){
 
-/*
+
   request(
 
     {
@@ -78,7 +78,6 @@ function getCurrentTimeFromWeb(params, callback){
           return callback(errors, { response : currentTime });
         }
       );
-*/
 
   });
 }
